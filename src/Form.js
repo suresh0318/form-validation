@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link } from "react-router-dom";
 
 
 function Form() {
@@ -179,6 +179,7 @@ function Form() {
           </button>
         </form>
       </div>
+      <h5 className="ml-3">Already registered <Link to="/login">Login now</Link></h5>
     </div>
   );
 }
