@@ -1,9 +1,8 @@
-
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
 
 function Form() {
-
   const navigate = useNavigate();
   const {
     register,
@@ -12,16 +11,16 @@ function Form() {
   } = useForm();
 
   const submitdata = (data) => {
-    console.log(data);
-    navigate("/message")
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    users.push({ name: data.fullname, password: data.password });
+    localStorage.setItem("users", JSON.stringify(users));
+    navigate("/message");
   };
 
   return (
     <div className="App">
       <div className="container py-4">
-        <h1 className="text-center text-info">React Form</h1>
-
- 
+        <h1 className="text-center text-info">Registration Form</h1>
         <form onSubmit={handleSubmit(submitdata)}>
           <div className="form-group">
             <label htmlFor="fullname">Full Name</label>
@@ -30,9 +29,13 @@ function Form() {
               className="form-control"
               id="fullname"
               placeholder="Enter Your Full Name"
-              {...register("fullname", { required: "full name is required" , minLength:{
-value:4,message:"minimum 4 characters"
-              } })}
+              {...register("fullname", {
+                required: "full name is required",
+                minLength: {
+                  value: 4,
+                  message: "minimum 4 characters",
+                },
+              })}
             />
             {errors.fullname && (
               <p className="text-danger">{errors.fullname.message}</p>
@@ -46,14 +49,17 @@ value:4,message:"minimum 4 characters"
               className="form-control"
               id="age"
               placeholder="Enter Your age"
-              {...register("age", { required: "age is required" , min:{
-                value:18,
-                message:"minimum age is 18"
-              },
-              max:{
-                value:60,
-                message:"maximum age is 60"
-              }})}
+              {...register("age", {
+                required: "age is required",
+                min: {
+                  value: 18,
+                  message: "minimum age is 18",
+                },
+                max: {
+                  value: 60,
+                  message: "maximum age is 60",
+                },
+              })}
             />
             {errors.age && <p className="text-danger">{errors.age.message}</p>}
           </div>
@@ -65,12 +71,14 @@ value:4,message:"minimum 4 characters"
               className="form-control"
               id="email"
               placeholder="Enter Your E-mail Address"
-              {...register("email", { required: "email is required" ,
-            pattern:{
-              value :/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message : "enter a valid email"
-            }
-            })}
+              {...register("email", {
+                required: "email is required",
+                pattern: {
+                  value:
+                    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  message: "enter a valid email",
+                },
+              })}
             />
             {errors.email && (
               <p className="text-danger">{errors.email.message}</p>
@@ -83,13 +91,13 @@ value:4,message:"minimum 4 characters"
               className="form-control"
               id="phone"
               placeholder="Enter Your Phone Number"
-              {...register("phone", { required: "phone is required" ,
-            pattern:{
-              value : /^\d{10}/,
-              message : "enter valid phone number"
-            },
-           
-            })}
+              {...register("phone", {
+                required: "phone is required",
+                pattern: {
+                  value: /^\d{10}/,
+                  message: "enter valid phone number",
+                },
+              })}
             />
             {errors.phone && (
               <p className="text-danger">{errors.phone.message}</p>
@@ -98,17 +106,19 @@ value:4,message:"minimum 4 characters"
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               placeholder="Enter Your Password"
               {...register("password", {
                 required: "password required",
                 minLength: { value: 8, message: "minimum 8 characters" },
-                pattern:{
-                  value :/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-                  message : "Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)"
-                }
+                pattern: {
+                  value:
+                    /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                  message:
+                    "Password (UpperCase, LowerCase, Number/SpecialChar and min 8 Chars)",
+                },
               })}
             />
             {errors.password && (
@@ -164,7 +174,6 @@ value:4,message:"minimum 4 characters"
             )}
           </div>
 
-         
           <button className="btn btn-primary" type="submit">
             Submit
           </button>
