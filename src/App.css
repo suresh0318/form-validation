@@ -1,0 +1,55 @@
+#main-wrapper {
+  width: 20rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #49d049;
+  padding: 40px;
+  border-radius: 1rem;
+  position: relative;
+  left: 35%;
+  top: 5rem;
+}
+
+.main-heading {
+  color: white;
+}
+.login-btn{
+  border: 3px solid #49d049;
+  outline: none;
+  background-color: white;
+  color: #49d049;
+  border-radius: 1rem;
+  position: relative;
+ left: 43%;
+ top: 7rem;
+}
+.newLink{
+ position: relative;
+ top: 10rem;
+ left: 50%;
+}
+
+h5{
+  margin-left: 8rem;
+}
+
+@media only screen and (max-width:768px) {
+  h5{
+    margin-left: 1rem;
+  }
+  #main-wrapper{
+    width: 15rem;
+    padding: auto;
+    position: relative;
+  left: 20%;
+  top: 5rem;
+  }
+  .login-btn{
+    position: relative;
+    left: 40%;
+    top: 6rem;
+  }
+ 
+}
